@@ -9,9 +9,6 @@
     <meta name="description" content="Yannick S. F Développeur Logicielle Full Stack">
     <meta name="twitter:title" content="Yannick S. F Développeur Logicielle Full Stack">
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-
     <style>
         h1 {
             font-size: 20px;
@@ -106,53 +103,15 @@
         </header>
         <hr>
 
-        <div id="app">
-            <h1 class="title ">Mes projets</h1>
-            <br>
-            <div class="columns is-multiline ">
-                <div v-for="item in sites " class="column is-one-third">
-                    <div class="card ">
-                        <header class="card-header ">
-                            <p class="card-header-title ">
-                                <a :href="item.url " class="card-footer-item " target="_about_blank ">{{ item.name }}</a>
-                            </p>
-                        </header>
-                        <div class="card-image ">
-                            <figure class="image is-4by3 ">
-                                <img :src="item.picture" alt="Placeholder image ">
-                            </figure>
-                        </div>
-                        <div class="card-content ">
-                            <div class="content ">
-                                <p>{{ item.description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <script>
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    picsum1: '',
-                    picsum2: '',
-                    sites: [{
-                        name: 'Les boulettes du bonheur',
-                        description: "Vient voir tu vas adorer 🙂 ",
-                        picture: 'https://picsum.photos/id/'.concat(Math.floor(Math.random() * 100).toString(), '/640/480'),
-                        url: 'https://happyness.yannicksf.xyz/',
-                    }, {
-                        name: "Flatland's Invaders",
-                        description: "Mon premier jeu :)",
-                        picture: 'https://picsum.photos/id/'.concat(Math.floor(Math.random() * 100).toString(), '/640/480'),
-                        url: "https://github.com/YannickSF/FlatlandsInvaders"
-                    }]
-                }
-
-            })
-        </script>
+        <ul>
+            <!--<li><a href="https://yannicksf.xyz">Home</a></li>
+            <li><a href="https://app.yannicksf.xyz">MulTVers</a></li>
+            <hr>-->
+            <li><a href="https://github.com/YannickSF">Github</a></li>
+            <li><a href="https://www.instagram.com/univers0111/">Instagram</a></li>
+            <hr>
+            <li><a href="mailto:yannick.feler@gmail.com">Mail </a></li>
+        </ul>
 
         <hr>
         <footer>
