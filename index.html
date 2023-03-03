@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Yannick S. F</title>
+    <link rel="icon" type="image/png" href="asset/favicon.ico">
+    <meta name="author" content="Yannick S. FELER">
+    <meta name="description" content="Yannick S. F Développeur Logicielle Full Stack">
+    <meta name="twitter:title" content="Yannick S. F Développeur Logicielle Full Stack">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <style>
+        h1 {
+            font-size: 20px;
+            color: #f01120;
+        }
+        
+        body,
+        html {
+            background: #080707;
+            margin: 0;
+            padding: 0;
+            font-family: 'Open sans', sans-serif;
+        }
+        
+        header {
+            margin-top: 3em;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header>img {
+            width: 7em;
+            height: 7em;
+            border-radius: 100%;
+            border: 2px solid #ff0d0d;
+        }
+        
+        header>h1 {
+            margin-top: 2em;
+            display: inline-block;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 1em;
+            background-color: #000a;
+            color: #ffdf0d;
+            padding: 0.3em 0.6em;
+            border: 1px solid #fff;
+        }
+        
+        ul {
+            box-sizing: border-box;
+            list-style: none;
+            margin: 0 auto;
+            padding: 2em;
+        }
+        
+        ul>li {
+            background-color: #fffa;
+            backdrop-filter: blur(10px) saturate(160%) contrast(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(160%) contrast(180%);
+            border: 1px solid #ff0d0d;
+            border-radius: 10em;
+            padding: 1em;
+            margin: 1.4em 0;
+        }
+        
+        ul>li>a {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5em;
+        }
+        
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        
+        footer {
+            color: #fffa;
+            margin-top: 2em;
+            margin-bottom: 2em;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <header>
+            <img src="./asset/S.png" />
+            <h1>Yannick S. FELER</h1>
+        </header>
+        <hr>
+
+        <div id="app">
+            <h1 class="title ">Mes projets</h1>
+            <br>
+            <div class="columns is-multiline ">
+                <div v-for="item in sites " class="column is-one-third">
+                    <div class="card ">
+                        <header class="card-header ">
+                            <p class="card-header-title ">
+                                <a :href="item.url " class="card-footer-item " target="_about_blank ">{{ item.name }}</a>
+                            </p>
+                        </header>
+                        <div class="card-image ">
+                            <figure class="image is-4by3 ">
+                                <img :src="item.picture" alt="Placeholder image ">
+                            </figure>
+                        </div>
+                        <div class="card-content ">
+                            <div class="content ">
+                                <p>{{ item.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    picsum1: '',
+                    picsum2: '',
+                    sites: [{
+                        name: 'Les boulettes du bonheur',
+                        description: "Vient voir tu vas adorer 🙂 ",
+                        picture: 'https://picsum.photos/id/'.concat(Math.floor(Math.random() * 100).toString(), '/640/480'),
+                        url: 'https://happyness.yannicksf.xyz/',
+                    }, {
+                        name: "Flatland's Invaders",
+                        description: "Mon premier jeu :)",
+                        picture: 'https://picsum.photos/id/'.concat(Math.floor(Math.random() * 100).toString(), '/640/480'),
+                        url: "https://github.com/YannickSF/FlatlandsInvaders"
+                    }]
+                }
+
+            })
+        </script>
+
+        <hr>
+        <footer>
+            <p>
+                <Strong>Forge</Strong> by Yannick S.F
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
