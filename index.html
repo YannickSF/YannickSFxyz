@@ -9,7 +9,7 @@
     <meta name="description" content="Yannick S. F Développeur Logicielle Full Stack">
     <meta name="twitter:title" content="Yannick S. F Développeur Logicielle Full Stack">
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
     <style>
@@ -53,36 +53,6 @@
             border: 1px solid #fff;
         }
         
-        ul {
-            box-sizing: border-box;
-            list-style: none;
-            margin: 0 auto;
-            padding: 2em;
-        }
-        
-        ul>li {
-            background-color: #fffa;
-            backdrop-filter: blur(10px) saturate(160%) contrast(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(160%) contrast(180%);
-            border: 1px solid #ff0d0d;
-            border-radius: 10em;
-            padding: 1em;
-            margin: 1.4em 0;
-        }
-        
-        ul>li>a {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5em;
-        }
-        
-        a {
-            color: black;
-            text-decoration: none;
-        }
-        
         footer {
             color: #fffa;
             margin-top: 2em;
@@ -98,65 +68,68 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" style="width: 50%;">
 
         <header>
-            <img src="./asset/S.png" />
-            <h1>Yannick <strong style="color:#ffdf0d;">S.</strong> FELER</h1>
+            <h1>Chat</h1>
         </header>
-        <hr>
 
-        <div id="app">
-            <h1 class="title " style="color: #ffdf0d;">Mes projets</h1>
-            <br>
-            <div class="columns is-multiline ">
-                <div v-for="item in sites " class="column is-one-third">
-                    <div class="card ">
-                        <header class="card-header ">
-                            <p class="card-header-title ">
-                                <a :href="item.url " class="card-footer-item " target="_about_blank ">{{ item.name }}</a>
-                            </p>
-                        </header>
-                        <div class="card-image ">
-                            <figure class="image is-4by3 ">
-                                <img :src="item.picture" alt="Placeholder image ">
-                            </figure>
-                        </div>
-                        <div class="card-content ">
-                            <div class="content ">
-                                <p>{{ item.description }}</p>
-                            </div>
-                        </div>
+        <div id="app" class="container">
+
+            <hr>
+            <script src="/socket.io/socket.io.js"></script>
+            <div class="container">
+                <div class="field">
+                    <label class="label" style="color:#f01120">Username</label>
+                    <div class="control">
+                        <input id="user" style="width:50%;" class="input" type="text" placeholder="Text input">
                     </div>
                 </div>
+                <div class="field">
+                    <label class="label" style="color:#f01120">Message</label>
+                    <div class="control">
+                        <input id="msg" class="input" type="text" placeholder="Text input">
+                    </div>
+                </div>
+                <button class="button is-danger" @click="sendMessage()">Send</button>
             </div>
+            <hr>
+
+            <script>
+                var socket = io();
+                socket.on('tlg', function(item) {
+                    let ul = document.getElementById("chat");
+                    let li = document.createElement("li");
+                    li.appendChild(document.createTextNode(item.user + ' - ' + item.msg));
+                    ul.appendChild(li);
+                })
+            </script>
+            <ul id="chat"></ul>
+
 
         </div>
         <script>
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    picsum1: '',
-                    picsum2: '',
-                    sites: [{
-                        name: 'MulTVers',
-                        description: "L'application du mois.",
-                        picture: 'https://picsum.photos/id/'.concat(Math.floor(Math.random() * 100).toString(), '/640/480'),
-                        url: 'https://app.yannicksf.xyz/',
-                    }, {
-                        name: 'Les boulettes du bonheur',
-                        description: "Vient voir tu vas adorer 🙂 ",
-                        picture: 'https://picsum.photos/id/'.concat(Math.floor(Math.random() * 100).toString(), '/640/480'),
-                        url: 'https://happyness.yannicksf.xyz/',
-                    }, {
-                        name: "Flatland's Invaders",
-                        description: "Mon premier jeu :)",
-                        picture: 'https://picsum.photos/id/'.concat(Math.floor(Math.random() * 100).toString(), '/640/480'),
-                        url: "https://github.com/YannickSF/FlatlandsInvaders"
-                    }]
-                }
+            const {
+                createApp
+            } = Vue
 
-            })
+            createApp({
+                data() {
+                    return {
+                        user: ''
+                    }
+                },
+                methods: {
+                    sendMessage() {
+                        this.user = document.getElementById('user').value;
+                        let msg = document.getElementById('msg').value;
+                        socket.emit('tlg', {
+                            'user': this.user,
+                            'msg': msg
+                        });
+                    }
+                }
+            }).mount('#app')
         </script>
 
         <hr>
